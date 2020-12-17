@@ -16,8 +16,8 @@ const addToDo = (todo) => {
 }
 
 // A function that removes an item at a given index from our todo list array. You can use splice!
-const removeToDo = (index) => {
-  todos.splice(index - 1, 1);
+const removeToDo = (id) => {
+  todos.splice(id, 1);
 }
 
 // Given a todo object, put it on the DOM. This is a pretty big function, so we'll walk through the different parts of it.
@@ -61,14 +61,16 @@ const printTodo = function (todo) {
 }
 
 // A function that print ALL todos. It should loop through our todos array and call the above print-one-todo function on each one.
-const printAllToDos = (todos) => {
+const printAllToDos = () => {
   for (const todo of todos) {
     printTodo(todo);
   }
 }
+// fancy way
+// const printAllToDos = () => todos.forEach((todo) => printTodo(todo))
+
 
 // Now here in the global code, call the above function, so our todos array gets printed out on page load (which is when global code is run). This is the only time we're calling a function ourselves; the rest is event listeners and helper functions that run when the user interacts with the DOM!
-
 printAllToDos(todos);
 
 
@@ -76,11 +78,22 @@ printAllToDos(todos);
 // A function that clears all todos from the DOM. This is a great helper function for refreshing our todos.
 // Test it in the console and see if your list disappears!
 
-// const clearAllToDos = () => { }
+const clearAllToDos = () => { 
+  const todos = document.querySelectorAll('.todo-item');
+  for(const todo of todos) {
+    todo.remove();
+  }
+}
+
 
 
 
 // Refresh our page by calling each of the two above functions. Since printing all todos onto the DOM is based on our todos array, if we make a change to our todos array, we can simply call this function, which will make our DOM match our todos array by simply clearing the page and repopulating it according to our todos' new state.
+
+const refreshToDos = () => {
+  clearAllToDos();
+  printAllToDos();
+}
 
 
 
@@ -96,16 +109,19 @@ Let's wire it all together. Add an event listener for the add todo button that w
 
 */
 
-const userInput = document.querySelector('todo-input');
-const addButton = document.querySelector(".add-todo")
+const userInput = document.querySelector("todo-input");
+const addButton = document.querySelector(".add-todo");
 
+addButton.addEventListener('click', () => {
 const newToDo = {
   text: userInput.value,
   complete: false,
   priority: 2,
+  id: todos.length,
 };
-
-addButton.addEventListener('click', addToDo(newToDo));
+  addToDo(newToDo);
+  printTodo(newTodo);
+});
 
 
 
