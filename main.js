@@ -31,7 +31,7 @@ const printTodo = function (todo) {
 
 
   // Append the li we made to the ul as the last child using `.appendChild`. If this isn't working for you, check what is being appended to what!
-  toDoList.appendChild(newToDo)
+  toDoList.appendChild(toDoItem)
 
 
   // Give our new li a `todo-item` class using `classList`. This will allow us to style it later if we want.
@@ -62,8 +62,8 @@ const printTodo = function (todo) {
 
 // A function that print ALL todos. It should loop through our todos array and call the above print-one-todo function on each one.
 const printAllToDos = (todos) => {
-  for (const toDoItem of todos) {
-    printTodo(toDoItem);
+  for (const todo of todos) {
+    printTodo(todo);
   }
 }
 
@@ -96,12 +96,16 @@ Let's wire it all together. Add an event listener for the add todo button that w
 
 */
 
-const input = document.querySelector('todo-input')
+const userInput = document.querySelector('todo-input');
+const addButton = document.querySelector(".add-todo")
+
 const newToDo = {
-  text: input.value,
+  text: userInput.value,
   complete: false,
   priority: 2,
-} 
+};
+
+addButton.addEventListener('click', addToDo(newToDo));
 
 
 
