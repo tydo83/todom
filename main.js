@@ -51,13 +51,6 @@ const printTodo = function (todo) {
 // This is quite a challenge, so feel free to come back to this one at the end!
 // You'll want to add an event listener to the `li` you just made, and in that event listener function, toggle its completeness on both the DOM (using `classList.toggle`) and in our global array (toggling its completeness property).
 // The hard part will be finding it on the DOM and finding it in our array. We can tell what `li` was clicked using the `event` property passed in to the event listener, and we can tell what object it goes to using the DOM element's id that we added above.
-
-
-
-
-
-
-
 }
 
 // A function that print ALL todos. It should loop through our todos array and call the above print-one-todo function on each one.
@@ -71,7 +64,7 @@ const printAllToDos = () => {
 
 
 // Now here in the global code, call the above function, so our todos array gets printed out on page load (which is when global code is run). This is the only time we're calling a function ourselves; the rest is event listeners and helper functions that run when the user interacts with the DOM!
-printAllToDos(todos);
+printAllToDos();
 
 
 
@@ -109,18 +102,18 @@ Let's wire it all together. Add an event listener for the add todo button that w
 
 */
 
-const userInput = document.querySelector("todo-input");
 const addButton = document.querySelector(".add-todo");
 
 addButton.addEventListener('click', () => {
-const newToDo = {
-  text: userInput.value,
-  complete: false,
-  priority: 2,
-  id: todos.length,
-};
+  const userInput = document.querySelector(".todo-input");
+  const newToDo = {
+    text: userInput.value,
+    complete: false,
+    priority: 2,
+    id: todos.length,
+  };
   addToDo(newToDo);
-  printTodo(newTodo);
+  printTodo(newToDo);
 });
 
 
